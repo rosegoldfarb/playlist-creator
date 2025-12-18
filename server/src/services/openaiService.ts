@@ -1,15 +1,13 @@
 import OpenAI from "openai"
-import dotenv from "dotenv"
-
-dotenv.config()
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY
 })
 
 // TODO: play around with gpt5.1 mini instead of gpt4.1 - should be quicker and cheaper but maybe worse
-export const getPlaylist = async (prompt: string) => {
-    console.log('Prompt: ', prompt)
+export const getPlaylist = async (prompt: string) => {   
     // prompt eg: "Upbeat older songs like Then He Kissed Me and Signed, Sealed, Delivered. 15-20 songs."
     try {
         const response = await openai.responses.create({
