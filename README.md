@@ -1,1 +1,1 @@
-# playlist-creator-server
+# playlist-creator
