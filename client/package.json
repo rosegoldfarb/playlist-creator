@@ -16,5 +16,9 @@
     "react-native": "0.81.5",
     "react-native-inappbrowser-reborn": "^3.7.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^25.0.2",
+    "@types/react": "^19.2.7"
+  }
 }

@@ -1,6 +1,6 @@
 import SecureStore from 'expo-secure-store'
 import InAppBrowser from 'react-native-inappbrowser-reborn'
-
+// can just be a js file
 const generateRandomString = (length: number) => {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const values = crypto.getRandomValues(new Uint8Array(length));
