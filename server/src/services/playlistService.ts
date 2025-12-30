@@ -8,12 +8,12 @@ export const getPlaylist = async (prompt: string) => {
     const playlistSuggestionResponse = await getPlaylistSuggestion(prompt);
     const spotifySongs: SpotifySong[] = [];
     
-    for (const song of playlistSuggestionResponse.songs) {
-        const trackDetails = await getTrackDetails(song.title, song.artist);
+    for (const {title, artist} of playlistSuggestionResponse.songs) {
+        const trackDetails = await getTrackDetails(title, artist);
         if (trackDetails) {
             spotifySongs.push(trackDetails);
         }
     }
-    
+
     return spotifySongs; 
 }
