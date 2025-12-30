@@ -1,8 +1,9 @@
 
 import { getSpotifyClientToken } from "./spotifyAuthService"
+import { SpotifySong } from "./playlist.types";
 
 // TODO: consider what else we want from this endpoint, i.e. album art
-export const getTrackDetails = async (title: string, artist: string) => {
+export const getTrackDetails = async (title: string, artist: string): Promise<SpotifySong | null> => {
   const token = await getSpotifyClientToken();
   const response = await fetch(
     `https://api.spotify.com/v1/search?q=${encodeURIComponent(title)}%20artist:${encodeURIComponent(artist)}&type=track`,

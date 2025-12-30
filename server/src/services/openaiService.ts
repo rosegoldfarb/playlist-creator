@@ -12,11 +12,11 @@ const Song = z.object({
 })
 
 const PlaylistResponse = z.object({
-    songs: z.array(Song)
+    songs: z.array(Song).min(1, "Playlist must contain at least one song")
 })
 
 // TODO: play around with gpt5.1 mini instead of gpt4.1 - should be quicker and cheaper but maybe worse
-export const getPlaylistSuggestion = async (prompt: string) => {
+export const getPlaylistSuggestion = async (prompt: string): Promise<z.infer<typeof PlaylistResponse>> => {
      // prompt eg: "Upbeat older songs like Then He Kissed Me and Signed, Sealed, Delivered. 15-20 songs."
     try {
         const response = await openai.responses.parse({
@@ -30,14 +30,17 @@ export const getPlaylistSuggestion = async (prompt: string) => {
             },
         });
 
-        // TODO: further validate response?
-        return response?.output_parsed;
+        const playlist = response.output_parsed;
+        if (!playlist) {
+            throw new Error("Failed to parse playlist from OpenAI response");
+        } 
+        
+        return playlist;
+
     } catch (err) {
-        // TODO: graceful error handling - decide where to handle errors (maybe not here) - middleware?
-        console.error("OpenAI error: ", err)
+        console.error(err)
         throw err
     }
-
 }
 
 
